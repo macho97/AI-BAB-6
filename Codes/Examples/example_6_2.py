@@ -2,7 +2,8 @@
 import cv2
 
 # Memuat Haar Cascade classifier untuk deteksi wajah frontal
-cascade_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+# cascade_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+cascade_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 # Membuka webcam (kamera index 0)
 camera = cv2.VideoCapture(0)

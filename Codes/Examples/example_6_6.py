@@ -2,7 +2,7 @@
 from PIL import Image
 import face_recognition
 
-image = face_recognition.load_image_file("faces.jpg")
+image = face_recognition.load_image_file("faces.png")
 face_locations = face_recognition.face_locations(image)
 
 count = 0

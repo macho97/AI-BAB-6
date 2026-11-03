@@ -4,8 +4,11 @@ import cv2
 # Membaca gambar wajah
 img = cv2.imread('face0.jpg')
 
-# Memuat Haar Cascade classifier untuk deteksi wajah frontal
-cascade_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+# # Memuat Haar Cascade classifier untuk deteksi wajah frontal
+# cascade_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+# Menjadi path built-in OpenCV:
+cascade_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 # Konversi gambar ke skala abu-abu (grayscale)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)

@@ -16,7 +16,7 @@ def getFaces(path):
         parts = filename.split('.')
         if len(parts) < 2 or parts[1] != 'jpeg':
             continue
-        print(imagepath)
+        print(f"Memuat: {imagepath}")
         face_image = face_recognition.load_image_file(imagepath)
         encodings = face_recognition.face_encodings(face_image)
         if len(encodings) > 0:
@@ -27,7 +27,7 @@ def getFaces(path):
     return IDs, faces
 
 known_face_names, known_face_encodings = getFaces(path)
-print(known_face_names)
+print(f"Wajah dikenali: {known_face_names}")
 
 video_capture = cv2.VideoCapture(0)
 
@@ -35,7 +35,10 @@ while True:
     ret, frame = video_capture.read()
     if not ret:
         break
-    rgb_frame = frame[:, :, ::-1]
+    
+    # FIX: Gunakan cv2.cvtColor untuk alokasi memori yang aman (Contiguous Array)
+    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    
     face_locations = face_recognition.face_locations(rgb_frame)
     face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
 

@@ -1,9 +1,9 @@
 # Example 6.5 OpenCV Face, Eye and Smile detection with Webcam
 import cv2
 
-faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-eyeCascade = cv2.CascadeClassifier('haarcascade_eye.xml')
-smileCascade = cv2.CascadeClassifier('haarcascade_smile.xml')
+faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+eyeCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
+smileCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_smile.xml')
 
 camera = cv2.VideoCapture(0)
 

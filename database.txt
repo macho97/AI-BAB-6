@@ -1,0 +1,6 @@
+Id,Name,Course
+001,Arya Bagus,Face Recog
+001,Arya Bagus,Face Recog
+001,Arya Bagus,Face Recog
+001,Arya Bagus,Face Recog
+001,Arya,Face Recog

@@ -1,13 +1,27 @@
-# Example 6.4 OpenCV Face, Eye and Smile detection
+import os
+import sys
 import cv2
 
-# Membaca gambar
-img = cv2.imread('face2.jpeg')
+# 1. Gunakan path built-in OpenCV untuk seluruh file XML Haar Cascade
+face_cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+eye_cascade_path = cv2.data.haarcascades + 'haarcascade_eye.xml'
+smile_cascade_path = cv2.data.haarcascades + 'haarcascade_smile.xml'
 
-# Memuat classifier untuk wajah, mata, dan senyuman
-faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-eyeCascade = cv2.CascadeClassifier('haarcascade_eye.xml')
-smileCascade = cv2.CascadeClassifier('haarcascade_smile.xml')
+faceCascade = cv2.CascadeClassifier(face_cascade_path)
+eyeCascade = cv2.CascadeClassifier(eye_cascade_path)
+smileCascade = cv2.CascadeClassifier(smile_cascade_path)
+
+# 2. Cek lokasi gambar (root folder atau subfolder Codes/Examples/)
+img_path = 'face2.jpeg'
+if not os.path.exists(img_path):
+    img_path = 'face2.jpg'
+
+img = cv2.imread(img_path)
+
+# 3. Validasi keberadaan gambar sebelum diproses
+if img is None:
+    print(f"Error: Gambar '{img_path}' tidak ditemukan! Pastikan file gambar ada di folder project.")
+    sys.exit(1)
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 

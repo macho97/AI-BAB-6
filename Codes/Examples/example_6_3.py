@@ -1,12 +1,25 @@
-# Example 6.3 OpenCV Faces and Eyes detection
+import os
+import sys
 import cv2
 
-# Membaca gambar
-img = cv2.imread('face1.jpeg')
+# 1. Gunakan path built-in OpenCV untuk file XML Haar Cascade
+face_cascade_path = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+eye_cascade_path = cv2.data.haarcascades + 'haarcascade_eye.xml'
 
-# Memuat classifier untuk wajah dan mata
-faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-eyeCascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+faceCascade = cv2.CascadeClassifier(face_cascade_path)
+eyeCascade = cv2.CascadeClassifier(eye_cascade_path)
+
+# 2. Cek lokasi gambar (apakah di root folder atau di Codes/Examples/)
+img_path = 'face1.jpeg'
+if not os.path.exists(img_path):
+    img_path = 'face1.jpg'
+
+img = cv2.imread(img_path)
+
+# 3. Validasi keberadaan gambar sebelum konversi warna
+if img is None:
+    print(f"Error: Gambar '{img_path}' tidak ditemukan! Pastikan lokasi file gambar sudah benar.")
+    sys.exit(1)
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 

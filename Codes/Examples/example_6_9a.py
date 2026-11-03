@@ -3,6 +3,7 @@ import face_recognition
 import cv2
 import numpy as np
 import os
+import sys
 
 path = '.'
 
@@ -31,13 +32,22 @@ print(known_face_names)
 
 testpath = "face2.jpeg"
 frame = cv2.imread(testpath)
-rgb_frame = frame[:, :, ::-1]
+
+# Pengecekan agar cv2 tidak memproses variabel kosong jika gambar hilang
+if frame is None:
+    print(f"Error: Gambar pengujian '{testpath}' tidak ditemukan!")
+    sys.exit(1)
+
+# FIX SEGFAULT: Gunakan cvtColor alih-alih [:, :, ::-1]
+rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
 face_locations = face_recognition.face_locations(rgb_frame)
 face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
 
 for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
     matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
     name = "Unknown"
+    
     face_distances = face_recognition.face_distance(known_face_encodings, face_encoding)
     best_match_index = np.argmin(face_distances)
     if matches[best_match_index]:
